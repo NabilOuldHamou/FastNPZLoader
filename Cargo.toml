@@ -1,0 +1,22 @@
+[package]
+name = "fast_npz"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "fast_npz"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.28.3"
+ndarray = "0.17.2"
+ndarray-npy = { version = "0.10.0", features = ["npz"] }
+rayon = "1.12"
+indicatif = "0.17"
+zip = { version = "0.6", default-features = false, features = ["deflate"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
