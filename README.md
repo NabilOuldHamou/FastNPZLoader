@@ -17,6 +17,8 @@ Requires [maturin](https://github.com/PyO3/maturin) and a Rust toolchain.
 
 ```bash
 pip install maturin
+# OR
+uv tool install maturin
 maturin develop --release   # install into current venv
 ```
 
