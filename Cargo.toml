@@ -15,6 +15,7 @@ ndarray-npy = { version = "0.10.0", features = ["npz"] }
 rayon = "1.12"
 indicatif = "0.17"
 zip = { version = "0.6", default-features = false, features = ["deflate"] }
+numpy = "0.28"
 
 [profile.release]
 opt-level = 3

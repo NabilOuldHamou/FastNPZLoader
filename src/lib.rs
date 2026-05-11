@@ -4,6 +4,7 @@ use pyo3::prelude::*;
 mod fast_npz {
     use indicatif::{ProgressBar, ProgressStyle};
     use ndarray_npy::ReadNpyExt;
+    use numpy::IntoPyArray;
     use pyo3::exceptions::PyRuntimeError;
     use pyo3::prelude::*;
     use pyo3::types::PyDict;
@@ -26,8 +27,9 @@ mod fast_npz {
 
         fn into_pyobject(self, py: Python<'py>) -> Result<Self::Output, Self::Error> {
             match self {
-                NpyData::Float64(v) => v.into_pyobject(py).map(|b| b.into_any()),
-                NpyData::Float32(v) => v.into_pyobject(py).map(|b| b.into_any()),
+                // into_pyarray moves the Vec into a numpy array — single memcpy, no boxing
+                NpyData::Float64(v) => Ok(v.into_pyarray(py).into_any()),
+                NpyData::Float32(v) => Ok(v.into_pyarray(py).into_any()),
                 NpyData::Strings(v) => v.into_pyobject(py).map(|b| b.into_any()),
             }
         }
