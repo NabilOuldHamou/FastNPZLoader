@@ -1,4 +1,4 @@
-# fast_npz
+# fast_npz (readme written by Claude)
 
 Parallel NPZ loader written in Rust, exposed as a Python extension via PyO3.  
 Loads an entire directory of `.npz` files concurrently across CPU cores.
