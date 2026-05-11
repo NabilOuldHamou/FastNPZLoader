@@ -47,14 +47,13 @@ mod fast_npz {
                 12,
             )
         };
-        let header =
-            std::str::from_utf8(&bytes[data_offset..data_offset + header_len]).ok()?;
+        let header = std::str::from_utf8(&bytes[data_offset..data_offset + header_len]).ok()?;
 
         let di = header.find("'descr':")?.saturating_add("'descr':".len());
         let rest = header[di..].trim_start();
         let quote = rest.chars().next()?;
         let inner = &rest[1..];
-        let descr = &inner[..inner.find(quote)?]; // e.g. "<f8", "|S5", "<U10"
+        let descr = &inner[..inner.find(quote)?];
 
         let mut chars = descr.chars();
         let endian = chars.next()?;
